@@ -12,6 +12,8 @@ Say "yes" to import it into Alfred. Done!
 ## How to use
 Open Alfred and type "gte" to translate from german to english. Type "gfe" to translate from english to german.
 
+You can also use "gae" to translate to english and let google autodetect the incoming language. "gag" does the same but translates to german.
+
 Alfred will show all the results that Google returned. Select the one that fits your situation best and the translated phrase will be copied to the clipboard.
 
 ## Screenshots
