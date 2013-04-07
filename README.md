@@ -6,7 +6,7 @@ A workflow for Alfred 2 that implements translation from german to english and v
 It's based on PHP and not very complex to understand.
 
 ## How to install
-Just download and double click the [workflow file](http://github.com/thomashempel/AlfredGoogleTranslateWorkflow/blob/master/GoogleTranslate.alfredworkflow)
+Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/raw/master/GoogleTranslate.alfredworkflow)
 Say "yes" to import it into Alfred. Done!
 
 ## How to use
