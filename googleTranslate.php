@@ -1,9 +1,7 @@
 <?php
-
 function googleTranslate($request, $sourceLanguage, $targetLanguage)
 {
-	$url = 'http://translate.google.com.br/translate_a/t?client=p&text='.urlencode($request).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1';
-	
+	$url = 'http://translate.google.com.br/translate_a/t?client=p&text='.urlencode($request).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
 	$defaults = array(									CURLOPT_RETURNTRANSFER => true,					CURLOPT_URL => $url,
 		CURLOPT_FRESH_CONNECT => true
 	);
@@ -14,7 +12,7 @@ function googleTranslate($request, $sourceLanguage, $targetLanguage)
 	$err = curl_error($ch);
 	curl_close($ch);
 
-	$result = '<?xml version="1.0"?><items>';
+	$result = '<?xml version="1.0" encoding="utf-8"?><items>';
 
 	$json = json_decode(utf8_encode($out));
 	if (isset($json->dict)) {
@@ -46,6 +44,6 @@ function googleTranslate($request, $sourceLanguage, $targetLanguage)
 	echo $result;
 }
 
-// googleTranslate('Wohnmobil', 'de', 'en');
+// googleTranslate('über', 'de', 'en');
 
 ?>
