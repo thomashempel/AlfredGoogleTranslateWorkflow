@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>scriptme.alfred.googletranslate</string>
+	<key>connections</key>
+	<dict>
+		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Thomas Hempel</string>
+	<key>description</key>
+	<string>Translation using Google V2.0</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Google Translate</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Translation copied to clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>keyword</key>
+				<string>translate</string>
+				<key>script</key>
+				<string>require_once 'googleTranslate.php';
+googleTranslate('{query}');</string>
+				<key>title</key>
+				<string>Translate to language</string>
+				<key>type</key>
+				<integer>1</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Uses Google to translate from German to English and Vice versa.
+It displays all possible translations that Google has to offer.</string>
+	<key>uidata</key>
+	<dict>
+		<key>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</key>
+		<dict>
+			<key>ypos</key>
+			<real>270</real>
+		</dict>
+		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
+		<dict>
+			<key>ypos</key>
+			<real>200</real>
+		</dict>
+		<key>D4855B2C-E8F1-455A-A032-ACB430E8D19C</key>
+		<dict>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
