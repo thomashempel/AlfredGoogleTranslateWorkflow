@@ -81,17 +81,7 @@ function googleTranslate($request, $sourceLanguage = 'auto', $targetLanguage = N
 	} else {
 		$phrase = $request;
 	}
-/*
-	if (!array_key_exists($sourceLanguage, $knownLanguages)) {
-		echo '<?xml version="1.0"?><items><item><title>Unknown language to translate from</item></items>';
-		return;
-	}
 
-	if (!array_key_exists($targetLanguage, $knownLanguages)) {
-		echo '<?xml version="1.0"?><items><item uid="mtranslate"><title>Unknown language to translate to</item></items>';
-		return;
-	}
-*/
 	$url = 'http://translate.google.com.br/translate_a/t?client=p&text='.urlencode($phrase).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
 
 	$defaults = array(
