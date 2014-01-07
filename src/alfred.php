@@ -72,7 +72,7 @@ class AlfredResultItem {
 
 		$xml = '<item';
 		foreach (array('uid', 'arg') as $key) {
-			if (array_key_exists($key, $options)) $xml .= ' '.$key.'="'.$options['uid'].'"';
+			if (array_key_exists($key, $options)) $xml .= ' '.$key.'="'.$options[$key].'"';
 		}
 		$xml .= '>';
 
