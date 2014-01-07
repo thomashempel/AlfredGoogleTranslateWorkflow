@@ -54,9 +54,16 @@ function googleTranslate($request)
 	$err = curl_error($ch);
 	curl_close($ch);
 
+
 	$xml = new AlfredResult();
-	$xml->setShared("uid", "mtranslate");
-	$xml->setShared("icon", "Icons/{$targetLanguage}.png");
+	$xml->setShared('uid', 'mtranslate');
+
+	$iconFilename = 'Icons/'.$targetLanguage.'.png';
+	if (!file_exists($iconFilename)) {
+		$iconFilename = 'icon.png';
+	}
+	$xml->setShared('icon', $iconFilename);
+
 
 	$json = json_decode($out);
 	$sourceLanguage = $json->src;
