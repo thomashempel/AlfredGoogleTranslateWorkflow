@@ -51,7 +51,6 @@ function googleTranslate($request)
 	$ch  = curl_init();
 	curl_setopt_array($ch, $defaults);
 	$out = curl_exec($ch);
-	$err = curl_error($ch);
 	curl_close($ch);
 
 
@@ -73,9 +72,9 @@ function googleTranslate($request)
 		if (is_array($googleResults)) {
 			foreach ($googleResults as $translatedData) {
 				$xml->addItem(array(
-					'arg' 		 => $translatedData->word,
-					'title' 	 => $translatedData->word.' ('.languageMap($targetLanguage).')',
-					'subtitle' => implode(', ', $translatedData->reverse_translation).' ('.languageMap($sourceLanguage).')'
+					'arg' 		=> $translatedData->word,
+					'title' 	=> $translatedData->word.' ('.languageMap($targetLanguage).')',
+					'subtitle'	=> implode(', ', $translatedData->reverse_translation).' ('.languageMap($sourceLanguage).')'
 				));
 			}
 		}
