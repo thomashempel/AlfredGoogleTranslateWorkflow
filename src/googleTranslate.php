@@ -30,12 +30,26 @@ require "./alfred.php";
 function parseRequest($request)
 {
 	$requestParts = explode(' ', $request);
-	$targetLanguage = array_shift($requestParts);
+	$languageSelector = array_shift($requestParts);
 	$phrase = implode(' ', $requestParts);
 
-	return array($phrase, 'auto', $targetLanguage);
+	$targetLanguage = $languageSelector;
+	$sourceLanguage = 'auto';
+
+	if (strpos($languageSelector, '>') > 0) {
+		list($sourceLanguage, $targetLanguage) = explode('>', $languageSelector);
+	} elseif (strpos($languageSelector, '<') > 0) {
+		list($targetLanguage, $sourceLanguage) = explode('<', $languageSelector);
+	}
+
+	return array($phrase, $sourceLanguage, $targetLanguage);
 }
 
+/**
+ * The method that is called by Alfred
+ *
+ * @param string $request	User input string
+ */
 function googleTranslate($request)
 {
 	list($phrase, $sourceLanguage, $targetLanguage) = parseRequest($request);
