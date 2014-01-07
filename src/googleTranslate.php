@@ -1,86 +1,20 @@
 <?php
 
-function googleTranslate($request, $sourceLanguage = 'auto', $targetLanguage = NULL)
-{
-	$knownLanguages = array(
-		'auto' => 'Automatic',
-		'af' => 'Afrikaans',
-		'sq' => 'Albanian',
-		'ar' => 'Arabic',
-		'hy' => 'Armenian',
-		'az' => 'Azerbaijani',
-		'eu' => 'Basque',
-		'be' => 'Belarusian',
-		'bn' => 'Bengali',
-		'bg' => 'Bulgarian',
-		'ca' => 'Catalan',
-		'zh-CN' => 'Chinese (Simplified)',
-		'zh-TW' => 'Chinese (Traditional)',
-		'hr' => 'Croatian',
-		'cs' => 'Czech',
-		'da' => 'Danish',
-		'nl' => 'Dutch',
-		'en' => 'English',
-		'eo' => 'Esperanto',
-		'et' => 'Estonian',
-		'tl' => 'Filipino',
-		'fi' => 'Finnish',
-		'fr' => 'French',
-		'gl' => 'Galician',
-		'ka' => 'Georgian',
-		'de' => 'German',
-		'el' => 'Greek',
-		'gu' => 'Gujarati',
-		'ht' => 'Haitian Creole',
-		'iw' => 'Hebrew',
-		'hi' => 'Hindi',
-		'hu' => 'Hungarian',
-		'is' => 'Icelandic',
-		'id' => 'Indonesian',
-		'ga' => 'Irish',
-		'it' => 'Italian',
-		'ja' => 'Japanese',
-		'kn' => 'Kannada',
-		'km' => 'Khmer',
-		'ko' => 'Korean',
-		'lo' => 'Lao',
-		'la' => 'Latin',
-		'lv' => 'Latvian',
-		'lt' => 'Lithuanian',
-		'mk' => 'Macedonian',
-		'ms' => 'Malay',
-		'mt' => 'Maltese',
-		'no' => 'Norwegian',
-		'fa' => 'Persian',
-		'pl' => 'Polish',
-		'pt' => 'Portuguese',
-		'ro' => 'Romanian',
-		'ru' => 'Russian',
-		'sr' => 'Serbian',
-		'sk' => 'Slovak',
-		'sl' => 'Slovenian',
-		'es' => 'Spanish',
-		'sw' => 'Swahili',
-		'sv' => 'Swedish',
-		'ta' => 'Tamil',
-		'te' => 'Telugu',
-		'th' => 'Thai',
-		'tr' => 'Turkish',
-		'uk' => 'Ukrainian',
-		'ur' => 'Urdu',
-		'vi' => 'Vietnamese',
-		'cy' => 'Welsh',
-		'yi' => 'Yiddish'
-	);
+require "./languages.php";
+require "./alfred.php";
 
-	if ($targetLanguage == NULL) {
-		$requestParts = explode(' ', $request);
-		$targetLanguage = $requestParts[0];
-		array_shift($requestParts);
-		$phrase = implode(' ', $requestParts);
-	} else {
-		$phrase = $request;
-	}
+function parseRequest($request)
+{
+	$requestParts = explode(' ', $request);
+	$targetLanguage = array_shift($requestParts);
+	$phrase = implode(' ', $requestParts);
+
+	return array($phrase, 'auto', $targetLanguage);
+}
+
+function googleTranslate($request)
+{
+	list($phrase, $sourceLanguage, $targetLanguage) = parseRequest($request);
 
 	$url = 'http://translate.google.com.br/translate_a/t?client=p&text='.urlencode($phrase).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
 
@@ -96,7 +30,9 @@ function googleTranslate($request, $sourceLanguage = 'auto', $targetLanguage = N
 	$err = curl_error($ch);
 	curl_close($ch);
 
-	$result = '<?xml version="1.0" encoding="utf-8"?><items>';
+	$xml = new AlfredResult();
+	$xml->setShared("uid", "mtranslate");
+	$xml->setShared("icon", "Icons/{$targetLanguage}.png");
 
 	$json = json_decode($out);
 	$sourceLanguage = $json->src;
@@ -105,31 +41,24 @@ function googleTranslate($request, $sourceLanguage = 'auto', $targetLanguage = N
 		$googleResults = $json->dict[0]->entry;
 		if (is_array($googleResults)) {
 			foreach ($googleResults as $translatedData) {
-				$result .= '<item uid="mtranslate" arg="'.$translatedData->word.'">';
-				$result .= '<title>'.$translatedData->word.' ('.$knownLanguages[$targetLanguage].')</title>';
-				$result .= '<subtitle>'.implode(', ', $translatedData->reverse_translation).' ('.$knownLanguages[$sourceLanguage].')</subtitle>';
-				$result .= '<icon>Icons/'.$targetLanguage.'.png</icon>';
-				$result .= '</item>';
+				$xml->addItem(array(
+					'arg' 		 => $translatedData->word,
+					'title' 	 => $translatedData->word.' ('.languageMap($targetLanguage).')',
+					'subtitle' => implode(', ', $translatedData->reverse_translation).' ('.languageMap($sourceLanguage).')'
+				));
 			}
 		}
 	} elseif (isset($json->sentences)) {
 		foreach ($json->sentences as $sentence) {
-			$result .= '<item uid="mtranslate" arg="'.$sentence->trans.'">';
-			$result .= '<title>'.$sentence->trans.' ('.$knownLanguages[$targetLanguage].')</title>';
-			$result .= '<subtitle>'.$sentence->orig.' ('.$knownLanguages[$sourceLanguage].')</subtitle>';
-			$result .= '<icon>Icons/'.$targetLanguage.'.png</icon>';
-			$result .= '</item>';
+			$xml->addItem(array(
+				'arg' 		 => $sentence->trans,
+				'title' 	 => $sentence->trans.' ('.languageMap($targetLanguage).')',
+				'subtitle' => $sentence->orig.' ('.languageMap($sourceLanguage).')'
+			));
 		}
 	} else {
-		$result .= '<item uid="mtranslate">';
-		$result .= '<title>No results found</title>';
-		$result .= '</item>';
+		$xml->addItem(array('title' => 'No results found'));
 	}
 
-	$result .= '</items>';
-	echo $result;
+	echo $xml;
 }
-
-// googleTranslate('über', 'auto', 'en');
-
-?>
