@@ -29,7 +29,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.0</string>
+	<string>Translation using Google V2.1</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -58,6 +58,8 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+			<key>version</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -71,6 +73,8 @@
 				<key>script</key>
 				<string>require_once 'googleTranslate.php';
 googleTranslate('{query}');</string>
+				<key>subtext</key>
+				<string>translate {from&gt;to OR to&lt;from OR to} {searchword}</string>
 				<key>title</key>
 				<string>Translate to language</string>
 				<key>type</key>
@@ -82,6 +86,8 @@ googleTranslate('{query}');</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</string>
+			<key>version</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -95,6 +101,8 @@ googleTranslate('{query}');</string>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
+			<key>version</key>
+			<integer>0</integer>
 		</dict>
 	</array>
 	<key>readme</key>
