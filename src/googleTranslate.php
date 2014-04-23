@@ -54,7 +54,7 @@ function googleTranslate($request)
 {
 	list($phrase, $sourceLanguage, $targetLanguage) = parseRequest($request);
 
-	$url = 'http://translate.google.com.br/translate_a/t?client=p&text='.urlencode($phrase).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
+	$url = 'http://translate.google.com/translate_a/t?client=p&text='.urlencode($phrase).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
 
 	$defaults = array(
 		CURLOPT_RETURNTRANSFER => true,
