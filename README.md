@@ -39,6 +39,8 @@ You can also leave the operator out at all. The behavior will be as in previous 
 
 When Google delivered the result, you can just copy the one you want to the clipboard by selecting it and pressing enter.
 
+Alternatively, since Version 2.2, you can open the original request directly on the Google website by pressing Alt+Enter.
+
 ## Languages
 
 * auto = Automatic
