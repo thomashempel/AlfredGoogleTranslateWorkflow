@@ -55,6 +55,7 @@ function googleTranslate($request)
 	list($phrase, $sourceLanguage, $targetLanguage) = parseRequest($request);
 
 	$url = 'http://translate.google.com/translate_a/t?client=p&text='.urlencode($phrase).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
+	$userUrl = 'https://translate.google.com/#'.$sourceLanguage.'/'.$targetLanguage.'/'.urlencode($phrase);
 
 	$defaults = array(
 		CURLOPT_RETURNTRANSFER => true,
@@ -76,28 +77,29 @@ function googleTranslate($request)
 		$iconFilename = 'icon.png';
 	}
 	$xml->setShared('icon', $iconFilename);
-
-
+	
 	$json = json_decode($out);
 	$sourceLanguage = $json->src;
-	
+
 	if (isset($json->dict)) {
 		$googleResults = $json->dict[0]->entry;
 		if (is_array($googleResults)) {
 			foreach ($googleResults as $translatedData) {
 				$xml->addItem(array(
-					'arg' 		=> $translatedData->word,
+					'arg' 		=> $userUrl.'|'.$translatedData->word,
+					'valid'		=> 'yes',
 					'title' 	=> $translatedData->word.' ('.languageMap($targetLanguage).')',
-					'subtitle'	=> implode(', ', $translatedData->reverse_translation).' ('.languageMap($sourceLanguage).')'
+					'subtitle'	=> implode(', ', $translatedData->reverse_translation).' ('.languageMap($sourceLanguage).')',
 				));
 			}
 		}
 	} elseif (isset($json->sentences)) {
 		foreach ($json->sentences as $sentence) {
 			$xml->addItem(array(
-				'arg' 		 => $sentence->trans,
-				'title' 	 => $sentence->trans.' ('.languageMap($targetLanguage).')',
-				'subtitle' => $sentence->orig.' ('.languageMap($sourceLanguage).')'
+				'arg' 		=> $userUrl.'|'.$sentence->trans,
+				'valid'		=> 'yes',
+				'title' 	=> $sentence->trans.' ('.languageMap($targetLanguage).')',
+				'subtitle'	=> $sentence->orig.' ('.languageMap($sourceLanguage).')',
 			));
 		}
 	} else {

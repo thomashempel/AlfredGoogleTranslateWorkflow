@@ -4,9 +4,11 @@
 <dict>
 	<key>bundleid</key>
 	<string>scriptme.alfred.googletranslate</string>
+	<key>category</key>
+	<string>Internet</string>
 	<key>connections</key>
 	<dict>
-		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
+		<key>29DF96C9-BB14-45DF-B797-5427A4221DD8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -25,11 +27,41 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>29DF96C9-BB14-45DF-B797-5427A4221DD8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Open request on Google website</string>
+			</dict>
+		</array>
+		<key>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>61046C6D-24FB-492C-BF76-584619DB729F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.1</string>
+	<string>Translation using Google V2.2.0</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -64,6 +96,24 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>$in = explode('|', "{query}");
+echo $in[1];</string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>29DF96C9-BB14-45DF-B797-5427A4221DD8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -72,7 +122,8 @@
 				<string>translate</string>
 				<key>script</key>
 				<string>require_once 'googleTranslate.php';
-googleTranslate('{query}');</string>
+googleTranslate('{query}');
+</string>
 				<key>subtext</key>
 				<string>translate {from&gt;to OR to&lt;from OR to} {searchword}</string>
 				<key>title</key>
@@ -104,26 +155,78 @@ googleTranslate('{query}');</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>$in = explode('|', "{query}");
+echo $in[0];
+ </string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>open {query}</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.script</string>
+			<key>uid</key>
+			<string>61046C6D-24FB-492C-BF76-584619DB729F</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Uses Google to translate from German to English and Vice versa.
+	<string>Uses Google to translate from any language to any other that is supported by Google.
+
 It displays all possible translations that Google has to offer.</string>
 	<key>uidata</key>
 	<dict>
+		<key>29DF96C9-BB14-45DF-B797-5427A4221DD8</key>
+		<dict>
+			<key>ypos</key>
+			<real>230</real>
+		</dict>
 		<key>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</key>
 		<dict>
 			<key>ypos</key>
-			<real>270</real>
+			<real>290</real>
+		</dict>
+		<key>61046C6D-24FB-492C-BF76-584619DB729F</key>
+		<dict>
+			<key>ypos</key>
+			<real>410</real>
 		</dict>
 		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
 		<dict>
 			<key>ypos</key>
-			<real>200</real>
+			<real>280</real>
 		</dict>
 		<key>D4855B2C-E8F1-455A-A032-ACB430E8D19C</key>
 		<dict>
 			<key>ypos</key>
-			<real>140</real>
+			<real>170</real>
+		</dict>
+		<key>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</key>
+		<dict>
+			<key>ypos</key>
+			<real>350</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>

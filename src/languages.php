@@ -99,5 +99,5 @@ function languageMap($key = null)
 {
 	global $LANGUAGE_MAP;
 
-	return is_null($key) ? $LANGUAGE_MAP : $LANGUAGE_MAP[$key];
+	return is_null($key) ? $LANGUAGE_MAP['auto'] : $LANGUAGE_MAP[$key];
 }
