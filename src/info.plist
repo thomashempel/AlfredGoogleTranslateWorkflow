@@ -61,7 +61,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.2.0</string>
+	<string>Translation using Google V2.2.1</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -100,7 +100,7 @@
 				<integer>127</integer>
 				<key>script</key>
 				<string>$in = explode('|', "{query}");
-echo $in[1];</string>
+echo stripslashes($in[1]);</string>
 				<key>type</key>
 				<integer>1</integer>
 			</dict>

@@ -77,6 +77,10 @@ function googleTranslate($request)
 		$iconFilename = 'icon.png';
 	}
 	$xml->setShared('icon', $iconFilename);
+
+	//$stderr = fopen('php://stderr', 'w');
+	//fwrite($stderr, $out);
+	//fclose($stderr);
 	
 	$json = json_decode($out);
 	$sourceLanguage = $json->src;
@@ -105,6 +109,8 @@ function googleTranslate($request)
 	} else {
 		$xml->addItem(array('title' => 'No results found'));
 	}
+	
+	// var_dump($xml);
 
 	echo $xml;
 }
