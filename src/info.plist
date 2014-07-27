@@ -61,7 +61,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.2.1</string>
+	<string>Translation using Google V2.2.2</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -122,7 +122,7 @@ echo stripslashes($in[1]);</string>
 				<string>translate</string>
 				<key>script</key>
 				<string>require_once 'googleTranslate.php';
-googleTranslate('{query}');
+googleTranslate("{query}");
 </string>
 				<key>subtext</key>
 				<string>translate {from&gt;to OR to&lt;from OR to} {searchword}</string>
