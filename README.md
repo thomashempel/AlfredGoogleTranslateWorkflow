@@ -26,16 +26,16 @@ Just download and double click the [workflow file](https://github.com/thomashemp
 Say "yes" to import it into Alfred. Done!
 
 ## How to use
-Open Alfred and type "translate" followed by the shortcode for the target language like "en" (english), "de" (german) or "it" (italian). You can find a complete list in the next section.
+Open Alfred and type "gt" followed by the shortcode for the target language like "en" (english), "de" (german) or "it" (italian). You can find a complete list in the next section.
 
 Alfred will show all the results that Google returned. Select the one that fits your situation best and the translated phrase will be copied to the clipboard.
 
 Normally the workflow will let Google decide which language you typed in. This doesn't fit in every case. For example if the word is ambiguous, spelled wrong or just means something different in another language.
 Since version 2.1 you can define from and to which language you want to translate. You do this via the ">" or "<" operator and the respective language codes. Here a few examples:
 
-    translate de>en Haus		// Will translate "Haus" from german to english.
-    translate de>fr Auto		// Will translate "Auto" from german to french
-    translate fr<en bottle		// Will translate "bottle" from english to french
+    gt de>en Haus		// Will translate "Haus" from german to english.
+    gt de>fr Auto		// Will translate "Auto" from german to french
+    gt fr<en bottle		// Will translate "bottle" from english to french
 
 As you can see, it's not pre-defined which language comes first. The source language or the target language. You define it by yourself with the operator ">" or "<" depending on what you prefer.
 
