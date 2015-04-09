@@ -61,7 +61,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.2.2</string>
+	<string>Translation using Google V2.2.3</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -119,7 +119,15 @@ echo stripslashes($in[1]);</string>
 				<key>escaping</key>
 				<integer>62</integer>
 				<key>keyword</key>
-				<string>translate</string>
+				<string>gt</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
 				<string>require_once 'googleTranslate.php';
 googleTranslate("{query}");

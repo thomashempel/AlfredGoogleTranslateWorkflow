@@ -1,19 +1,19 @@
 Google Translate Alfred Workflow
 =============================
 
-Version 2.2.2
+Version 2.2.3
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2013-2014 Thomas Hempel <thomas@scriptme.de>
+Copyright (c) 2013-2015 Thomas Hempel <thomas@scriptme.de>
 
-# BREAKING NEWS! April 8th 2015
-
-It seems like Google closed the open API endpoints for it's translation services. Therefore this Workflow *does not work anymore*. It's sad, but there not much I can do. I use this on a daily basis and will rewrite this workflow to use the dict.cc database in the near future. Thank you all for your support and the many stars here on GitHub! :-)
+**Thanks to everyone who gave feedback and provided fixes for this Workflow!!! You are awesome!**
 
 ### Attention!
+
+_Google changed something in the API. They seem to have blocked some clients. The workflow works for now. BUt I can't guaranty, that it will work for long. I will try to implement a dict.cc endpoint for a future version._
 
 This version 2 is a complete rewrite! It works differently than before while keeping the basic functionality, it is not longer bound to english and german. It know let Google decide which language is the source and you can define what the target language is in your query.
 
