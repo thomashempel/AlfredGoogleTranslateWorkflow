@@ -46,6 +46,25 @@
 				<string>Open request on Google website</string>
 			</dict>
 		</array>
+		<key>C852D4A8-132A-4A0B-A930-B91C2C0B61BE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>29DF96C9-BB14-45DF-B797-5427A4221DD8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Open request on Google website</string>
+			</dict>
+		</array>
 		<key>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</key>
 		<array>
 			<dict>
@@ -61,7 +80,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.2.3</string>
+	<string>Translation using Google V2.2.4</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -96,6 +115,43 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>keyword</key>
+				<string>translate</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>script</key>
+				<string>require_once 'googleTranslate.php';
+googleTranslate("{query}");
+</string>
+				<key>subtext</key>
+				<string>translate {from&gt;to OR to&lt;from OR to} {searchword}</string>
+				<key>title</key>
+				<string>Translate to language</string>
+				<key>type</key>
+				<integer>1</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C852D4A8-132A-4A0B-A930-B91C2C0B61BE</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
@@ -108,6 +164,21 @@ echo stripslashes($in[1]);</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>29DF96C9-BB14-45DF-B797-5427A4221DD8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -145,21 +216,6 @@ googleTranslate("{query}");
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -224,7 +280,12 @@ It displays all possible translations that Google has to offer.</string>
 		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
 		<dict>
 			<key>ypos</key>
-			<real>280</real>
+			<real>350</real>
+		</dict>
+		<key>C852D4A8-132A-4A0B-A930-B91C2C0B61BE</key>
+		<dict>
+			<key>ypos</key>
+			<real>230</real>
 		</dict>
 		<key>D4855B2C-E8F1-455A-A032-ACB430E8D19C</key>
 		<dict>
