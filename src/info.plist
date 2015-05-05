@@ -80,7 +80,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.2.4</string>
+	<string>Translation using Google V2.3.0</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -109,6 +109,26 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>$in = explode('|', "{query}");
+echo stripslashes($in[1]);</string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>29DF96C9-BB14-45DF-B797-5427A4221DD8</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -146,24 +166,6 @@ googleTranslate("{query}");
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>C852D4A8-132A-4A0B-A930-B91C2C0B61BE</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>$in = explode('|', "{query}");
-echo stripslashes($in[1]);</string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>29DF96C9-BB14-45DF-B797-5427A4221DD8</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -222,6 +224,8 @@ googleTranslate("{query}");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
@@ -241,6 +245,8 @@ echo $in[0];
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>

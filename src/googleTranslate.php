@@ -74,7 +74,7 @@ function googleTranslate($request)
 
 	$iconFilename = 'Icons/'.$targetLanguage.'.png';
 	if (!file_exists($iconFilename)) {
-		$iconFilename = 'icon.png';
+		$iconFilename = 'Icons/Unknown.png';
 	}
 	$xml->setShared('icon', $iconFilename);
 
