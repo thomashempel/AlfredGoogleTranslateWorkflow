@@ -60,12 +60,14 @@ function googleTranslate($request)
 	$defaults = array(
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_URL => $url,
-		CURLOPT_FRESH_CONNECT => true
+		CURLOPT_FRESH_CONNECT => true,
+		CURLOPT_USERAGENT => 'AlfredGoogleTranslateWorkflow'
 	);
 
 	$ch  = curl_init();
 	curl_setopt_array($ch, $defaults);
 	$out = curl_exec($ch);
+	// file_put_contents('/tmp/alfred.out', $url . "\n" . $out);
 	curl_close($ch);
 
 
@@ -78,10 +80,6 @@ function googleTranslate($request)
 	}
 	$xml->setShared('icon', $iconFilename);
 
-	//$stderr = fopen('php://stderr', 'w');
-	//fwrite($stderr, $out);
-	//fclose($stderr);
-	
 	$json = json_decode($out);
 	$sourceLanguage = $json->src;
 
