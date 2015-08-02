@@ -1,7 +1,7 @@
 Google Translate Alfred Workflow
 =============================
 
-Version 2.3.0
+Version 2.3.1
 
 ## License
 
@@ -9,11 +9,14 @@ The MIT License (MIT)
 
 Copyright (c) 2013-2015 Thomas Hempel <thomas@scriptme.de>
 
-**Thanks to everyone who gave feedback and provided fixes for this Workflow!!! You are awesome!**
+**Thanks to everyone who uses this workflow, gives feedback and provides fixes. You are awesome!!!**
+
+**If you like the Workflow and use it a lot, please consider a small donation via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=54USV9NXE9WFY).** _If you don't like PayPal but still want to give me a little something, feel free to contact me via the e-mail address above. :-)_
+
 
 ### Attention!
 
-_Google changed something in the API. They seem to have blocked some clients. The workflow works for now. BUt I can't guaranty, that it will work for long. I will try to implement a dict.cc endpoint for a future version._
+_Google changed something in the API. They seem to have blocked some clients. The workflow works for now. But I can't guaranty, that it will work for long. I will try to implement a dict.cc endpoint for a future version._
 
 This version 2 is a complete rewrite! It works differently than before while keeping the basic functionality, it is not longer bound to english and german. It know let Google decide which language is the source and you can define what the target language is in your query.
 
@@ -128,6 +131,8 @@ This is how it should look like:
 
 Thanks for using the workflow!
 Feel free to fork and/or make suggestions.
+
+If you like the Workflow and use it a lot, please consider a small donation via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=54USV9NXE9WFY).
 
 Best wishes,
 Thomas
