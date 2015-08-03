@@ -76,6 +76,7 @@ $LANGUAGE_MAP = array(
 	'fa' => 'Persian',
 	'pl' => 'Polish',
 	'pt' => 'Portuguese',
+	'pt-BR' => 'Brazilian Portuguese',
 	'ro' => 'Romanian',
 	'ru' => 'Russian',
 	'sr' => 'Serbian',
