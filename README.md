@@ -1,7 +1,7 @@
 Google Translate Alfred Workflow
 =============================
 
-Version 2.3.1
+Version 2.3.2
 
 ## License
 
