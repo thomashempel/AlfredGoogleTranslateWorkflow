@@ -1,6 +1,10 @@
 Google Translate Alfred Workflow
 =============================
 
+# BETA Release
+
+I released a new version 3.0.0 as BETA. It brings built in default settings and multiple target languages. Cool stuff! Check it out in the [V3 Branch](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/tree/V3) 
+
 Version 2.3.2
 
 ## License
