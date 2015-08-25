@@ -3,7 +3,7 @@ Google Translate Alfred Workflow
 
 # BETA Release
 
-I released a new version 3.0.0 as BETA. It brings built in default settings and multiple target languages. Cool stuff! Check it out in the [V3 Branch](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/tree/V3) 
+I released a new version 3.0.0 as BETA. It brings built in default settings and multiple target languages. Cool stuff! Check it out in the [V3 Branch](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/tree/V3)
 
 Version 2.3.2
 
@@ -29,7 +29,7 @@ A workflow for Alfred 2 that implements translation from any language to any oth
 It's based on PHP and not very complex to understand.
 
 ## How to install
-Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/raw/master/GoogleTranslate.alfredworkflow)
+Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/blob/master/GoogleTranslate.alfredworkflow)
 Say "yes" to import it into Alfred. Done!
 
 ## How to use
@@ -105,6 +105,7 @@ Alternatively, since Version 2.2, you can open the original request directly on 
 * fa = Persian
 * pl = Polish
 * pt = Portuguese
+* pt-BR = Brazilian Portuguese
 * ro = Romanian
 * ru = Russian
 * sr = Serbian
