@@ -1,11 +1,41 @@
 Google Translate Alfred Workflow
 =============================
 
-# BETA Release
+Version 3.0.0 BETA
 
-I released a new version 3.0.0 as BETA. It brings built in default settings and multiple target languages. Cool stuff! Check it out in the [V3 Branch](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/tree/V3) 
+# BETA RELEASE !!!
 
-Version 2.3.2
+Since version 3.0.0 the workflow supports build in settings and multiple target languages. This was requested a few times. To implement this, I had to rewrite the whole thing almost completely ... again ;-)
+
+The settings are not perfect yet. They write the data as soon as some valid input is typed in. I think it might me better to write the changes on enter. But to achieve that, a little more work has to be done. Anyways, this is quite usable already.
+
+Some documentation is missing, too. But here is the short version:
+
+    gt settings     // Will display the current default settings
+
+    gt set targetLanguage fr        // Will set the default target language to french
+
+    gt set targetLanguage en,fr     // Will set the default target languages to english and french
+
+If the default value "auto" for your source language is not working well for you, it is possible to set your default source via
+
+    gt set sourceLanguage de       // Which will set the default source language to german
+
+The new target language format is a comma seprated list. In other words, if you want to translate to a specific combination of languages you can achieve that like this:
+
+    gt fr,en Bildschirm
+
+Of course you can still select the source and target like before. But keep in mind, that you can only set multiple target languages. For obvious reasons, you can't define multiple source languages. The new workflow will fall back to your default settings when a certain language is invalid. This also works in lists of languages. If you for example set something like
+
+    gt en,ger,fr Haus
+
+This would fallback to
+
+    gt en,fr Haus
+
+since "ger" is not a valid language identifier.
+
+Please try it out and give me your feedback.
 
 ## License
 
