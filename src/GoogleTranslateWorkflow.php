@@ -58,8 +58,10 @@ class GoogleTranslateWorkflow
 
 		if ($command == 'settings') {
 			$result = $this->showSettings();
+
 		} else if ($command == 'set') {
 			$result = $this->set($requestParts[0], $requestParts[1]);
+			
 		} else {
 			list($sourceLanguage, $targetLanguage) = $this->extractLanguages($command);
 			$this->log(array($sourceLanguage, $targetLanguage));
