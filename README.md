@@ -1,41 +1,11 @@
 Google Translate Alfred Workflow
 =============================
 
-Version 3.0.0 BETA
+Version 3.0.0
 
 # BETA RELEASE !!!
 
 Since version 3.0.0 the workflow supports build in settings and multiple target languages. This was requested a few times. To implement this, I had to rewrite the whole thing almost completely ... again ;-)
-
-The settings are not perfect yet. They write the data as soon as some valid input is typed in. I think it might me better to write the changes on enter. But to achieve that, a little more work has to be done. Anyways, this is quite usable already.
-
-Some documentation is missing, too. But here is the short version:
-
-    gt settings     // Will display the current default settings
-
-    gt set targetLanguage fr        // Will set the default target language to french
-
-    gt set targetLanguage en,fr     // Will set the default target languages to english and french
-
-If the default value "auto" for your source language is not working well for you, it is possible to set your default source via
-
-    gt set sourceLanguage de       // Which will set the default source language to german
-
-The new target language format is a comma seprated list. In other words, if you want to translate to a specific combination of languages you can achieve that like this:
-
-    gt fr,en Bildschirm
-
-Of course you can still select the source and target like before. But keep in mind, that you can only set multiple target languages. For obvious reasons, you can't define multiple source languages. The new workflow will fall back to your default settings when a certain language is invalid. This also works in lists of languages. If you for example set something like
-
-    gt en,ger,fr Haus
-
-This would fallback to
-
-    gt en,fr Haus
-
-since "ger" is not a valid language identifier.
-
-Please try it out and give me your feedback.
 
 ## License
 
@@ -63,11 +33,26 @@ Just download and double click the [workflow file](https://github.com/thomashemp
 Say "yes" to import it into Alfred. Done!
 
 ## How to use
-Open Alfred and type "translate" (or "gt") followed by the shortcode for the target language like "en" (english), "de" (german) or "it" (italian). You can find a complete list in the next section.
+Open Alfred and type "translate" (or "gt") followed by the shortcode for the target language like "en" (english), "de" (german) or "it" (italian). You can find a complete list at the end of this document.
 
-Alfred will show all the results that Google returned. Select the one that fits your situation best and the translated phrase will be copied to the clipboard.
+Since Version 3.0.0 there is a new target language format available. It is a simple comma separated list. In other words, if you want to translate to a specific combination of languages you can achieve that like this:
+
+    gt fr,en Bildschirm
+
+Of course you can still select the source and target like before. But keep in mind, that you can only set multiple target languages. For obvious reasons, you can't define multiple source languages.
+
+The workflow will fall back to your default settings when a certain language is invalid. This also works in lists of languages. If you for example type something like
+
+    gt en,ger,fr Haus
+
+This would fallback to
+
+    gt en,fr Haus
+
+since "ger" is not a valid language identifier.
 
 Normally the workflow will let Google decide which language you typed in. This doesn't fit in every case. For example if the word is ambiguous, spelled wrong or just means something different in another language.
+
 Since version 2.1 you can define from and to which language you want to translate. You do this via the ">" or "<" operator and the respective language codes. Here a few examples:
 
     translate de>en Haus	// Will translate "Haus" from german to english.
@@ -81,6 +66,32 @@ You can also leave the operator out at all. The behavior will be as in previous 
 When Google delivered the result, you can just copy the one you want to the clipboard by selecting it and pressing enter.
 
 Alternatively, since Version 2.2, you can open the original request directly on the Google website by pressing Alt+Enter.
+
+If you want to have the result copied and pasted into your open document automatically, use Cmd+Enter when selecting the result. This works from Version 3.0.0.
+
+## Settings
+
+From Version 3.0.0 you can define the default values, that are used directly within the worflow. So, you no longer have to edit the source code files.
+
+To show all available options and and their current value you can type
+
+    gtset show
+
+To change an option type gtset and the option name, followed by the value.
+
+    gtset targetLanguage fr
+
+You can take advantage of the new possibility to translate to several target languages at once. If you, for example, need to translate to english and french regularily, you can just set the default target languages like this:
+
+    gtset targetLanguage en,fr
+
+If the default value "auto" for your source language is not working well for you, it is possible to set your default source via
+
+    gtset sourceLanguage de
+
+__To set any option back to it's default value, you can simply set "default" as value.__
+
+    gtset sourceLanguage default
 
 ## Languages
 
