@@ -24,7 +24,9 @@
  * THE SOFTWARE.
  */
 
+require './alfred.php';
 require './workflows.php';
+require './languages.php';
 
 class GoogleTranslateWorkflowBase
 {
@@ -56,7 +58,7 @@ class GoogleTranslateWorkflowBase
         $filePath = $this->getConfigFilePath();
         if (file_exists($filePath)) {
             $settings = json_decode(file_get_contents($filePath), true);
-
+            // file_put_contents('/tmp/alfed.log', 'LOADED: ' . print_r($settings, true));
         }
 
         // Only set settings if anything is stored in config file. Otherwise use the defaults.
@@ -67,11 +69,14 @@ class GoogleTranslateWorkflowBase
             $this->settings = $this->defaultSettings;
 
         }
+
+        // file_put_contents('/tmp/alfed.log', 'FINAL: ' . print_r($this->settings, true));
     }
 
     protected function saveSettings()
 	{
 		$filePath = $this->getConfigFilePath();
+        file_put_contents($filePath, json_encode($this->settings));
 	}
 
     protected function getConfigFilePath()

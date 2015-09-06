@@ -24,8 +24,6 @@
  * THE SOFTWARE.
  */
 
-require './alfred.php';
-require './languages.php';
 require './GoogleTranslateWorkflowBase.php';
 
 class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
@@ -43,11 +41,9 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 		if ($command == 'show') {
 			$result = $this->showSettings();
 
-		} else if ($command == 'reset') {
-			$result = $this->reset($requestParts[0]);
-
 		} else {
 			$result = $this->set($command, $requestParts[0]);
+
 		}
 
 		$this->log($result);
@@ -113,13 +109,17 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 				$item['subtitle'] = 'Current value = ' . $this->settings[$setting];
 
 			} else {
-				$trimmedValue = trim($value);
+				$trimmedValue = strtolower(trim($value));
+				if ($trimmedValue == 'default') {
+					$trimmedValue = $this->defaultSettings[$setting];
+				}
+
 				if ($this->languages->isAvailable($trimmedValue)) {
-					$item['subtitle'] = 'New value = ' . $value;
-					$item['arg'] = $setting . ':' . $value;
+					$item['subtitle'] = 'New value = ' . $trimmedValue;
+					$item['arg'] = $setting . ':' . $trimmedValue;
 
 				} else {
-					$requestedLanguages = explode(',', $value);
+					$requestedLanguages = explode(',', $trimmedValue);
 					$validLanguages = array();
 					foreach ($requestedLanguages as $languageKey) {
 						$trimmedKey = trim($languageKey);

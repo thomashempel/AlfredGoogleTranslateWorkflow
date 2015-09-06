@@ -24,28 +24,10 @@
  * THE SOFTWARE.
  */
 
-require './languages.php';
-require './alfred.php';
-require './workflows.php';
+require './GoogleTranslateWorkflowBase.php';
 
-class GoogleTranslateWorkflow
+class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 {
-	protected $DEBUG = false;
-
-	protected $workflowsInstance;
-
-	protected $languages;
-
-	protected $settings = array('sourceLanguage' => 'auto', 'targetLanguage' => 'en');
-
-	protected $validOptions = array('sourceLanguage' => 'Source Language', 'targetLanguage' => 'Target Language');
-
-	public function __construct()
-	{
-		$this->workflowsInstance = new Workflows();
-		$this->languages = new Languages();
-		$this->loadSettings();
-	}
 
 	public function process($request)
 	{
@@ -56,102 +38,18 @@ class GoogleTranslateWorkflow
 		$phrase = (count($requestParts) > 0) ? implode(' ', $requestParts) : $command;
 		$result = '';
 
-		if ($command == 'settings') {
-			$result = $this->showSettings();
-
-		} else if ($command == 'set') {
-			$result = $this->set($requestParts[0], $requestParts[1]);
-			
-		} else {
-			list($sourceLanguage, $targetLanguage) = $this->extractLanguages($command);
-			$this->log(array($sourceLanguage, $targetLanguage));
-			$targetLanguages = explode(',', $targetLanguage);
-			$googleResults = array();
-			foreach ($targetLanguages as $targetLanguage) {
-				$googleResults[$targetLanguage] = $this->fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase);
-			}
-			$this->log($googleResults);
-			$result = $this->processGoogleResults($googleResults);
+		list($sourceLanguage, $targetLanguage) = $this->extractLanguages($command);
+		$this->log(array($sourceLanguage, $targetLanguage));
+		$targetLanguages = explode(',', $targetLanguage);
+		$googleResults = array();
+		foreach ($targetLanguages as $targetLanguage) {
+			$googleResults[$targetLanguage] = $this->fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase);
 		}
+		$this->log($googleResults);
+		$result = $this->processGoogleResults($googleResults);
 
 		$this->log($result);
 		return $result;
-	}
-
-	protected function showSettings()
-	{
-		$xml = new AlfredResult();
-		$xml->setShared('uid', 'setting');
-
-		foreach ($this->settings as $settingKey => $settingValue) {
-			$xml->addItem(array(
-				'arg' 	=> $settingKey,
-				'valid'	=> 'yes',
-				'title'	=> $settingKey . ' = ' . $settingValue
-			));
-		}
-
-		return $xml;
-	}
-
-	protected function set($setting, $value)
-	{
-		$xml = new AlfredResult();
-		$xml->setShared('uid', 'setting');
-
-		if (array_key_exists($setting, $this->validOptions)) {
-			$trimmedValue = trim($value);
-			if ($this->languages->isAvailable($trimmedValue)) {
-				$this->settings[$setting] = $trimmedValue;
-				$this->saveSettings();
-				$xml->addItem(array('title' => 'New default value for ' . $setting . ' is ' . $this->languages->map($trimmedValue) . ' (' . $trimmedValue . ')'));
-			} else {
-				$requestedLanguages = explode(',', $value);
-				$validLanguages = array();
-				foreach ($requestedLanguages as $languageKey) {
-					$trimmedKey = trim($languageKey);
-					if ($this->languages->isAvailable($trimmedKey)) {
-						$validLanguages[$trimmedKey] = $this->languages->map($trimmedKey);
-					}
-				}
-				if (count($validLanguages) > 0) {
-					$checkedValue = implode(',', array_keys($validLanguages));
-					$this->settings[$setting] = $checkedValue;
-					$this->saveSettings();
-					$xml->addItem(array('title' => 'New default value for ' . $setting . ' is ' . implode(', ', $validLanguages) . ' (' . $checkedValue . ')'));
-				} else {
-					$xml->addItem(array('title' => 'Invalid value ' . $value));
-				}
-			}
-
-		} else {
-			$xml->addItem(array('title' => 'Invalid option ' . $setting));
-		}
-
-		return $xml;
-	}
-
-	protected function loadSettings()
-	{
-		$this->log('loadSettings');
-		$settings = null;
-		$filePath = $this->getConfigFilePath();
-		if (file_exists($filePath)) {
-			$settings = json_decode($filePath);
-		}
-
-		$this->log($settings, 'LOADED settings');
-		// Only set settings if anything is stored in config file. Otherwise use the defaults.
-		if (is_array($settings)) {
-			$this->log('Write settings');
-			$this->settings = $settings;
-		}
-	}
-
-	protected function saveSettings()
-	{
-		$filePath = $this->getConfigFilePath();
-		file_put_contents($filePath, json_encode($this->settings));
 	}
 
 	/**
@@ -294,16 +192,4 @@ class GoogleTranslateWorkflow
 		return $iconFilename;
 	}
 
-	protected function getConfigFilePath()
-	{
-		return $this->workflowsInstance->data() . '/config.json';
-	}
-
-	protected function log($data, $title = null)
-	{
-		if ($this->DEBUG) {
-			$msg = (!empty($title) ? $title . ': ' : '') . print_r($data, TRUE);
-			file_put_contents('php://stdout', $msg . "\n");
-		}
-	}
 }
