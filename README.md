@@ -1,11 +1,13 @@
 Google Translate Alfred Workflow
 =============================
 
-Version 3.0.0
+# Version 3.0.0
 
-# BETA RELEASE !!!
+## Changelog
 
-Since version 3.0.0 the workflow supports build in settings and multiple target languages. This was requested a few times. To implement this, I had to rewrite the whole thing almost completely ... again ;-)
+ * The workflow now supports multiple target languages. This was requested a few times. To implement this, I had to rewrite the whole thing almost completely ... again ;-)
+ * This version comes with a separate tool (gtset) to set the default source language and the default target language.
+ * Last but not least, selecting the result via Cmd+Enter, the result will be pasted into your active application automatically.
 
 ## License
 
@@ -29,7 +31,7 @@ A workflow for Alfred 2 that implements translation from any language to any oth
 It's based on PHP and not very complex to understand.
 
 ## How to install
-Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/blob/master/GoogleTranslate.alfredworkflow)
+Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/blob/master/Google%20Translate.alfredworkflow)
 Say "yes" to import it into Alfred. Done!
 
 ## How to use
