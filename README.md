@@ -31,7 +31,7 @@ A workflow for Alfred 2 that implements translation from any language to any oth
 It's based on PHP and not very complex to understand.
 
 ## How to install
-Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/blob/master/Google%20Translate.alfredworkflow)
+Just download and double click the [workflow file](https://github.com/thomashempel/AlfredGoogleTranslateWorkflow/releases)
 Say "yes" to import it into Alfred. Done!
 
 ## How to use
