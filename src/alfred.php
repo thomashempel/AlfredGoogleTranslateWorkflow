@@ -71,7 +71,7 @@ class AlfredResultItem {
 		$options = array_merge($shared, $this->item);
 
 		$xml = '<item';
-		foreach (array('uid', 'arg', 'valid') as $key) {
+		foreach (array('uid', 'arg', 'valid', 'autocomplete') as $key) {
 			if (array_key_exists($key, $options)) $xml .= ' '.$key.'="'.$options[$key].'"';
 		}
 		$xml .= '>';
