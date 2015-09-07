@@ -24,8 +24,6 @@ Copyright (c) 2013-2015 Thomas Hempel <thomas@scriptme.de>
 
 _Google changed something in the API. They seem to have blocked some clients. The workflow works for now. But I can't guaranty, that it will work for long. I will try to implement a dict.cc endpoint for a future version._
 
-This version 2 is a complete rewrite! It works differently than before while keeping the basic functionality, it is not longer bound to english and german. It know let Google decide which language is the source and you can define what the target language is in your query.
-
 A workflow for Alfred 2 that implements translation from any language to any other language known to Google.
 
 It's based on PHP and not very complex to understand.
