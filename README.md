@@ -1,13 +1,21 @@
 Google Translate Alfred Workflow
 =============================
 
-# Version 3.0.1
+# Version 3.0.2
 
 ## Changelog
 
- * The workflow now supports multiple target languages. This was requested a few times. To implement this, I had to rewrite the whole thing almost completely ... again ;-)
- * This version comes with a separate tool (gtset) to set the default source language and the default target language.
- * Last but not least, selecting the result via Cmd+Enter, the result will be pasted into your active application automatically.
+**Important note** Either Google has aggravated their DDOS checks in the translate API or something else is wrong on their side. Anyways, several users reported problems with "No results found" messages.
+
+This is caused by Google, saying that too many requests came from the users network. Which is strange, since nothing has changed on the workflows side. Unfortunately, there is not much I can do, to prevent this error. All I can do is, to try to send fewer requests and hope that will help.
+
+So, this release does two things to work against the problem.
+ * First it will no longer request translations every time you type a letter. There is a 300ms delay before the request is sent to Google. The delay can be configured in the Script Filter in the workflow itself,
+ * Secondly, the phrase has to be longer than 2 characters. I don't think this is a problem, but please let me now if it is.
+
+Again, this is not a guarantied fix. I have no idea, how Google is grouping the requests per network. And there is little to nothing I can do about it. :-/
+
+Any idea how to solve this, is very welcome.
 
 ## License
 

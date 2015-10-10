@@ -28,7 +28,6 @@ require './GoogleTranslateWorkflowBase.php';
 
 class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 {
-
 	public function process($request)
 	{
 		$this->log($request);
@@ -37,6 +36,10 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 		$command = array_shift($requestParts);
 		$phrase = (count($requestParts) > 0) ? implode(' ', $requestParts) : $command;
 		$result = '';
+
+		if (strlen($phrase) < 3) {
+			return $this->getSimpleMessage('More input needed', 'The word has to be longer than 2 characters');
+		}
 
 		list($sourceLanguage, $targetLanguage) = $this->extractLanguages($command);
 		$this->log(array($sourceLanguage, $targetLanguage));
@@ -174,6 +177,14 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 			}
 		}
 
+		return $xml;
+	}
+
+	protected function getSimpleMessage($message, $subtitle = '')
+	{
+		$xml = new AlfredResult();
+		$xml->setShared('uid', 'mtranslate');
+		$xml->addItem(array('title' => $message, 'subtitle' => $subtitle));
 		return $xml;
 	}
 
