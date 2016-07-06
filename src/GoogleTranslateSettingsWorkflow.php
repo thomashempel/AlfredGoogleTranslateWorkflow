@@ -38,6 +38,10 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 		$phrase = (count($requestParts) > 0) ? implode(' ', $requestParts) : $command;
 		$result = '';
 
+		if (strlen($phrase) < 3) {
+			return $this->getSimpleMessage('More input needed', 'The word has to be longer than 2 characters');
+		}
+
 		if ($command == 'show') {
 			$result = $this->showSettings();
 
@@ -202,6 +206,14 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 		}
 
 		return array(strtolower($sourceLanguage), strtolower($targetLanguage));
+	}
+
+	protected function getSimpleMessage($message, $subtitle = '')
+	{
+		$xml = new AlfredResult();
+		$xml->setShared('uid', 'mtranslate');
+		$xml->addItem(array('title' => $message, 'subtitle' => $subtitle));
+		return $xml;
 	}
 
 	protected function getUserURL($sourceLanguage, $targetLanguage, $phrase)
