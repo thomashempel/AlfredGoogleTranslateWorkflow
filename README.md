@@ -1,36 +1,22 @@
 Google Translate Alfred Workflow
 =============================
 
-# Version 3.0.2
+# Version 3.1.0
 
 ## Changelog
 
-**Important note** Either Google has aggravated their DDOS checks in the translate API or something else is wrong on their side. Anyways, several users reported problems with "No results found" messages.
-
-This is caused by Google, saying that too many requests came from the users network. Which is strange, since nothing has changed on the workflows side. Unfortunately, there is not much I can do, to prevent this error. All I can do is, to try to send fewer requests and hope that will help.
-
-So, this release does two things to work against the problem.
- * First it will no longer request translations every time you type a letter. There is a 300ms delay before the request is sent to Google. The delay can be configured in the Script Filter in the workflow itself,
- * Secondly, the phrase has to be longer than 2 characters. I don't think this is a problem, but please let me now if it is.
-
-Again, this is not a guarantied fix. I have no idea, how Google is grouping the requests per network. And there is little to nothing I can do about it. :-/
-
-Any idea how to solve this, is very welcome.
+ * This integrates a library to get Google results without the problem of running into the request limit (see https://github.com/Stichoza/google-translate-php). The only downside I see at the moment, is that the used API only returns one result and no alternatives. But I guess it's better than not working at all.
+ 
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2013-2015 Thomas Hempel <thomas@scriptme.de>
+Copyright (c) 2013-2016 Thomas Hempel <thomas@scriptme.de>
 
 **Thanks to everyone who uses this workflow, gives feedback and provides fixes. You are awesome!!!**
 
 **If you like the Workflow and use it a lot, please consider a small donation via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=54USV9NXE9WFY).** _If you don't like PayPal but still want to give me a little something, feel free to contact me via the e-mail address above. :-)_
-
-
-### Attention!
-
-_Google changed something in the API. They seem to have blocked some clients. The workflow works for now. But I can't guaranty, that it will work for long. I will try to implement a dict.cc endpoint for a future version._
 
 A workflow for Alfred 2 that implements translation from any language to any other language known to Google.
 

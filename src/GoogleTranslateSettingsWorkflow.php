@@ -3,7 +3,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Thomas Hempel <thomas@scriptme.de>
+ * Copyright (c) 2013-2016 Thomas Hempel <thomas@scriptme.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,10 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 		$command = array_shift($requestParts);
 		$phrase = (count($requestParts) > 0) ? implode(' ', $requestParts) : $command;
 		$result = '';
+
+		if (strlen($phrase) < 3) {
+			return $this->getSimpleMessage('More input needed', 'The word has to be longer than 2 characters');
+		}
 
 		if ($command == 'show') {
 			$result = $this->showSettings();
@@ -202,6 +206,14 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 		}
 
 		return array(strtolower($sourceLanguage), strtolower($targetLanguage));
+	}
+
+	protected function getSimpleMessage($message, $subtitle = '')
+	{
+		$xml = new AlfredResult();
+		$xml->setShared('uid', 'mtranslate');
+		$xml->addItem(array('title' => $message, 'subtitle' => $subtitle));
+		return $xml;
 	}
 
 	protected function getUserURL($sourceLanguage, $targetLanguage, $phrase)
