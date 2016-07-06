@@ -1,28 +1,21 @@
 Google Translate Alfred Workflow
 =============================
 
-# Version 3.0.0
+# Version 3.1.0
 
 ## Changelog
 
- * The workflow now supports multiple target languages. This was requested a few times. To implement this, I had to rewrite the whole thing almost completely ... again ;-)
- * This version comes with a separate tool (gtset) to set the default source language and the default target language.
- * Last but not least, selecting the result via Cmd+Enter, the result will be pasted into your active application automatically.
+ * This integrates a library to get Google results without the problem of running into the request limit (see https://github.com/Stichoza/google-translate-php). The only downside I see at the moment, is that the used API only returns one result and no alternatives. But I guess it's better than not working at all.
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2013-2015 Thomas Hempel <thomas@scriptme.de>
+Copyright (c) 2013-2016 Thomas Hempel <thomas@scriptme.de>
 
 **Thanks to everyone who uses this workflow, gives feedback and provides fixes. You are awesome!!!**
 
 **If you like the Workflow and use it a lot, please consider a small donation via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=54USV9NXE9WFY).** _If you don't like PayPal but still want to give me a little something, feel free to contact me via the e-mail address above. :-)_
-
-
-### Attention!
-
-_Google changed something in the API. They seem to have blocked some clients. The workflow works for now. But I can't guaranty, that it will work for long. I will try to implement a dict.cc endpoint for a future version._
 
 A workflow for Alfred 2 that implements translation from any language to any other language known to Google.
 
