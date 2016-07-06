@@ -24,7 +24,10 @@
  * THE SOFTWARE.
  */
 
+require 'vendor/autoload.php';
 require './GoogleTranslateWorkflowBase.php';
+
+use Stichoza\GoogleTranslate\TranslateClient;
 
 class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 {
@@ -45,8 +48,8 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 		foreach ($targetLanguages as $targetLanguage) {
 			$googleResults[$targetLanguage] = $this->fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase);
 		}
-		$this->log($googleResults);
-		$result = $this->processGoogleResults($googleResults);
+		$this->log($googleResults, 'Google Results');
+		$result = $this->processGoogleResults($googleResults, $phrase, $sourceLanguage);
 
 		$this->log($result);
 		return $result;
@@ -111,67 +114,30 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 
 	protected function fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase)
 	{
-		$url = 'http://translate.google.com/translate_a/t?client=it&text='.urlencode($phrase).'&hl=en-EN&sl='.$sourceLanguage.'&tl='.$targetLanguage.'&multires=1&ssel=0&tsel=0&sc=1&ie=UTF-8&oe=UTF-8';
-		$userUrl = 'https://translate.google.com/#'.$sourceLanguage.'/'.$targetLanguage.'/'.urlencode($phrase);
-
-		$defaults = array(
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_URL => $url,
-			CURLOPT_FRESH_CONNECT => true,
-			CURLOPT_USERAGENT => 'AlfredGoogleTranslateWorkflow'
-		);
-
-		$ch  = curl_init();
-		curl_setopt_array($ch, $defaults);
-		$out = curl_exec($ch);
-		// file_put_contents('/tmp/alfred.out', $url . "\n" . $out);
-		$this->log($out, $url);
-		curl_close($ch);
-
-		return json_decode($out);
+		$client = new TranslateClient($sourceLanguage, $targetLanguage);
+		$response = $client->getResponse($phrase);
+		return $response;
 	}
 
-	protected function processGoogleResults(array $googleResults)
+	protected function processGoogleResults(array $googleResults, $sourcePhrase, $sourceLanguage)
 	{
 		$xml = new AlfredResult();
 		$xml->setShared('uid', 'mtranslate');
 
-		foreach ($googleResults as $targetLanguage => $result) {
-			$sourceLanguage = $result->src;
-
-			if (isset($result->dict)) {
-				$dictResults = $result->dict[0]->entry;
-				if (is_array($dictResults)) {
-					foreach ($dictResults as $translatedData) {
-
-						$xml->addItem(array(
-							'arg' 		=> $this->getUserURL($sourceLanguage, $targetLanguage, $translatedData->reverse_translation[0]).'|'.$translatedData->word,
-							'valid'		=> 'yes',
-							'title' 	=> $translatedData->word.' ('.$this->languages->map($targetLanguage).')',
-							'subtitle'	=> implode(', ', $translatedData->reverse_translation).' ('.$this->languages->map($sourceLanguage).')',
-							'icon'		=> $this->getFlag($targetLanguage)
-						));
-
-						//
-						// If more than one target language is set, break after the first entry
-						if (count($googleResults) > 1) {
-							break;
-						}
-					}
-				}
-			} elseif (isset($result->sentences)) {
-				foreach ($result->sentences as $sentence) {
-					$xml->addItem(array(
-						'arg' 		=> $this->getUserURL($sourceLanguage, $targetLanguage, $sentence->orig).'|'.$sentence->trans,
-						'valid'		=> 'yes',
-						'title' 	=> $sentence->trans.' ('.$this->languages->map($targetLanguage).')',
-						'subtitle'	=> $sentence->orig.' ('.$this->languages->map($sourceLanguage).')',
-						'icon'		=> $this->getFlag($targetLanguage)
-					));
-				}
-			} else {
-				$xml->addItem(array('title' => 'No results found'));
+		if (count($googleResults) > 0) {
+			foreach ($googleResults as $targetLanguage => $result) {
+				$xml->addItem(array(
+					'arg' 		=> $this->getUserURL($sourceLanguage, $targetLanguage, $sourcePhrase).'|'.$result,
+					'valid'		=> 'yes',
+					'title' 	=> $result,
+					'subtitle'	=> $sourcePhrase.' ('.$this->languages->map($sourceLanguage).')',
+					'icon'		=> $this->getFlag($targetLanguage)
+				));
 			}
+
+		} else {
+			$xml->addItem(array('title' => 'No results found'));
+
 		}
 
 		return $xml;
