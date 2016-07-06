@@ -4,10 +4,19 @@
 <dict>
 	<key>bundleid</key>
 	<string>scriptme.alfred.googletranslate</string>
-	<key>category</key>
-	<string>Internet</string>
 	<key>connections</key>
 	<dict>
+		<key>00C1890E-A7C4-4D80-9466-A2DF213A64A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ED6FA13D-9991-41F7-A2CA-6A72C29B9956</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>29DF96C9-BB14-45DF-B797-5427A4221DD8</key>
 		<array>
 			<dict>
@@ -27,6 +36,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>4779C69A-07C0-4CAF-B321-0149FFEC8020</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>00C1890E-A7C4-4D80-9466-A2DF213A64A9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
 		<array>
 			<dict>
@@ -36,6 +56,14 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F933F53E-6F5B-4D63-98EC-8D426CD8DB9C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Paste the result into the active application</string>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -58,6 +86,14 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>F933F53E-6F5B-4D63-98EC-8D426CD8DB9C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Paste the result into the active application</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -69,7 +105,34 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>61046C6D-24FB-492C-BF76-584619DB729F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>F933F53E-6F5B-4D63-98EC-8D426CD8DB9C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DC25C28B-C651-4FCB-97AC-309BB4EBBC23</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -80,7 +143,7 @@
 	<key>createdby</key>
 	<string>Thomas Hempel</string>
 	<key>description</key>
-	<string>Translation using Google V2.3.0</string>
+	<string>Translation using Google V3.1.1</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -109,6 +172,21 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>D4855B2C-E8F1-455A-A032-ACB430E8D19C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -150,8 +228,9 @@ echo stripslashes($in[1]);</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>script</key>
-				<string>require_once 'googleTranslate.php';
-googleTranslate("{query}");
+				<string>require_once 'GoogleTranslateWorkflow.php';
+$gtwf = new GoogleTranslateWorkflow();
+echo $gtwf-&gt;process("{query}");
 </string>
 				<key>subtext</key>
 				<string>translate {from&gt;to OR to&lt;from OR to} {searchword}</string>
@@ -172,15 +251,35 @@ googleTranslate("{query}");
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>$in = explode('|', "{query}");
+echo stripslashes($in[1]);</string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F933F53E-6F5B-4D63-98EC-8D426CD8DB9C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
 				<key>clipboardtext</key>
 				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</string>
+			<string>DC25C28B-C651-4FCB-97AC-309BB4EBBC23</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -202,9 +301,9 @@ googleTranslate("{query}");
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>script</key>
-				<string>require_once 'googleTranslate.php';
-googleTranslate("{query}");
-</string>
+				<string>require_once 'GoogleTranslateWorkflow.php';
+$gtwf = new GoogleTranslateWorkflow();
+echo $gtwf-&gt;process("{query}");</string>
 				<key>subtext</key>
 				<string>translate {from&gt;to OR to&lt;from OR to} {searchword}</string>
 				<key>title</key>
@@ -230,8 +329,7 @@ googleTranslate("{query}");
 				<integer>127</integer>
 				<key>script</key>
 				<string>$in = explode('|', "{query}");
-echo $in[0];
- </string>
+echo $in[0];</string>
 				<key>type</key>
 				<integer>1</integer>
 			</dict>
@@ -261,6 +359,89 @@ echo $in[0];
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Translation setting changed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>ED6FA13D-9991-41F7-A2CA-6A72C29B9956</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>keyword</key>
+				<string>gtset</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>script</key>
+				<string>require_once 'GoogleTranslateSettingsWorkflow.php';
+$gtset = new GoogleTranslateSettingsWorkflow();
+echo $gtset-&gt;process("{query}");</string>
+				<key>subtext</key>
+				<string>set {option} {value}</string>
+				<key>title</key>
+				<string>Google Translate Settings</string>
+				<key>type</key>
+				<integer>1</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>4779C69A-07C0-4CAF-B321-0149FFEC8020</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>require_once 'GoogleTranslateSettingsWorkflow.php';
+$gtset = new GoogleTranslateSettingsWorkflow();
+echo $gtset-&gt;store("{query}");</string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>00C1890E-A7C4-4D80-9466-A2DF213A64A9</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Uses Google to translate from any language to any other that is supported by Google.
@@ -268,40 +449,65 @@ echo $in[0];
 It displays all possible translations that Google has to offer.</string>
 	<key>uidata</key>
 	<dict>
+		<key>00C1890E-A7C4-4D80-9466-A2DF213A64A9</key>
+		<dict>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
 		<key>29DF96C9-BB14-45DF-B797-5427A4221DD8</key>
 		<dict>
 			<key>ypos</key>
-			<real>230</real>
+			<real>130</real>
 		</dict>
 		<key>3D812156-6A07-474D-AB9C-C0D3B6DC0ECF</key>
 		<dict>
 			<key>ypos</key>
-			<real>290</real>
+			<real>130</real>
+		</dict>
+		<key>4779C69A-07C0-4CAF-B321-0149FFEC8020</key>
+		<dict>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>61046C6D-24FB-492C-BF76-584619DB729F</key>
 		<dict>
 			<key>ypos</key>
-			<real>410</real>
+			<real>370</real>
 		</dict>
 		<key>6D5E0BC8-BB35-4DE4-A613-5F8486B3C5CD</key>
 		<dict>
 			<key>ypos</key>
-			<real>350</real>
+			<real>370</real>
 		</dict>
 		<key>C852D4A8-132A-4A0B-A930-B91C2C0B61BE</key>
 		<dict>
 			<key>ypos</key>
-			<real>230</real>
+			<real>130</real>
 		</dict>
 		<key>D4855B2C-E8F1-455A-A032-ACB430E8D19C</key>
 		<dict>
 			<key>ypos</key>
-			<real>170</real>
+			<real>10</real>
+		</dict>
+		<key>DC25C28B-C651-4FCB-97AC-309BB4EBBC23</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>ED6FA13D-9991-41F7-A2CA-6A72C29B9956</key>
+		<dict>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>F6AD7144-A500-4CBC-81FE-1BCD819AAF39</key>
 		<dict>
 			<key>ypos</key>
-			<real>350</real>
+			<real>370</real>
+		</dict>
+		<key>F933F53E-6F5B-4D63-98EC-8D426CD8DB9C</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>

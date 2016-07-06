@@ -31,6 +31,7 @@ use Stichoza\GoogleTranslate\TranslateClient;
 
 class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 {
+
 	public function process($request)
 	{
 		$this->log($request);
@@ -117,7 +118,7 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 
 	protected function fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase)
 	{
-		$client = new TranslateClient($sourceLanguage, $targetLanguage);
+		$client = new TranslateClient(($sourceLanguage == 'auto') ? null : $sourceLanguage, $targetLanguage);
 		$response = $client->getResponse($phrase);
 		return $response;
 	}
@@ -129,13 +130,24 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 
 		if (count($googleResults) > 0) {
 			foreach ($googleResults as $targetLanguage => $result) {
-				$xml->addItem(array(
-					'arg' 		=> $this->getUserURL($sourceLanguage, $targetLanguage, $sourcePhrase).'|'.$result,
-					'valid'		=> 'yes',
-					'title' 	=> $result,
-					'subtitle'	=> $sourcePhrase.' ('.$this->languages->map($sourceLanguage).')',
-					'icon'		=> $this->getFlag($targetLanguage)
-				));
+				if (is_array($result)) {
+					$xml->addItem(array(
+						'arg' 		=> $this->getUserURL($result[1], $targetLanguage, $sourcePhrase).'|'.$result[0],
+						'valid'		=> 'yes',
+						'title' 	=> $result[0],
+						'subtitle'	=> $sourcePhrase.' ('.$this->languages->map($result[1]).')',
+						'icon'		=> $this->getFlag($targetLanguage)
+					));
+				} else {
+					$xml->addItem(array(
+						'arg' 		=> $this->getUserURL($sourceLanguage, $targetLanguage, $sourcePhrase).'|'.$result,
+						'valid'		=> 'yes',
+						'title' 	=> $result,
+						'subtitle'	=> $sourcePhrase.' ('.$this->languages->map($sourceLanguage).')',
+						'icon'		=> $this->getFlag($targetLanguage)
+					));
+				}
+
 			}
 
 		} else {
