@@ -38,10 +38,6 @@ class GoogleTranslateSettingsWorkflow extends GoogleTranslateWorkflowBase
 		$phrase = (count($requestParts) > 0) ? implode(' ', $requestParts) : $command;
 		$result = '';
 
-		if (strlen($phrase) < 3) {
-			return $this->getSimpleMessage('More input needed', 'The word has to be longer than 2 characters');
-		}
-
 		if ($command == 'show') {
 			$result = $this->showSettings();
 
