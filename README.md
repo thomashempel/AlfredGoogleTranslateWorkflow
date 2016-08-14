@@ -1,9 +1,15 @@
 Google Translate Alfred Workflow
 =============================
 
-# Version 3.1.2
+# Version 3.2.0
 
 ## Changelog
+
+### 3.2.0
+
+ * Makes the workflow compatible to Alfred 2 and 3.
+
+### 3.1.2
 
  * This integrates a library to get Google results without the problem of running into the request limit (see https://github.com/Stichoza/google-translate-php). The only downside I see at the moment, is that the used API only returns one result and no alternatives. But I guess it's better than not working at all.
 
