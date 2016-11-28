@@ -229,16 +229,16 @@
         },
         {
             "name": "stichoza/google-translate-php",
-            "version": "v3.2.8",
+            "version": "v3.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Stichoza/google-translate-php.git",
-                "reference": "0e07828824c46f1bfd1822d824cf805211bf98a9"
+                "reference": "a029d8b93b201ddfeba60375837d27c6fcb00376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/0e07828824c46f1bfd1822d824cf805211bf98a9",
-                "reference": "0e07828824c46f1bfd1822d824cf805211bf98a9",
+                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/a029d8b93b201ddfeba60375837d27c6fcb00376",
+                "reference": "a029d8b93b201ddfeba60375837d27c6fcb00376",
                 "shasum": ""
             },
             "require": {
@@ -274,7 +274,7 @@
                 "php",
                 "translate"
             ],
-            "time": "2016-05-16 08:35:53"
+            "time": "2016-09-14 11:42:35"
         }
     ],
     "packages-dev": [],
