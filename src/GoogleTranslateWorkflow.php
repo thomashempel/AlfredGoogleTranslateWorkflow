@@ -119,7 +119,7 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 	protected function fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase)
 	{
 		$client = new TranslateClient(($sourceLanguage == 'auto') ? null : $sourceLanguage, $targetLanguage);
-		$response = $client->getResponse($phrase);
+		$response = $client->translate($phrase);
 		return $response;
 	}
 
