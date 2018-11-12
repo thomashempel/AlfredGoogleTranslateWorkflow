@@ -119,6 +119,7 @@ class GoogleTranslateWorkflow extends GoogleTranslateWorkflowBase
 	protected function fetchGoogleTranslation($sourceLanguage, $targetLanguage, $phrase)
 	{
 		$client = new TranslateClient(($sourceLanguage == 'auto') ? null : $sourceLanguage, $targetLanguage);
+		$client->setUrlBase('http://translate.google.cn/translate_a/single'); // Set Google Translate URL base (This is not necessary, only for some countries)
 		$response = $client->translate($phrase);
 		return $response;
 	}
